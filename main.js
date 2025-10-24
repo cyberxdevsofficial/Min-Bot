@@ -158,7 +158,7 @@ async function kavixmdminibotmessagehandler(socket, number) {
               const freeMemMB = (os.freemem() / (1024 * 1024)).toFixed(2);
               const activeBots = activeSockets.size;
 
-              const message = `*𝙿𝚁𝙸𝙽𝙲𝙴 𝙼𝙸𝙽𝙸 𝙱𝙾𝚃*
+              const message = `*ANUWH MD MINI BOT*
 
 *╭━━━━━━━━━━━━━━━━●◌*
 *│ \`● Greet :\`* *Hi User 👋*

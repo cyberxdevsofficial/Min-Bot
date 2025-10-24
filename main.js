@@ -166,6 +166,15 @@ async function kavixmdminibotmessagehandler(socket, number) {
 *│ \`● Run Time :\`* ${hours}h ${minutes}m ${seconds}s
 *│ \`● Your Number :\`* ${sanitizedNumber}
 *│ \`● Active Bots :\`* ${activeBots}
+*│ \`● Owner Number :\`* +94710695082
+*│ \`● OS: ${os.type()} ${os.release()}
+*│ \`● Arch: ${os.arch()}
+*│ \`● Platform: Anuga Senithu's Private Ubuntu VPS (1TB)
+*│ \`● CPU: ${os.cpus()[0].model}
+*│ \`● Cores: ${os.cpus().length}
+*│ \`● Memory: ${usedMem}GB / ${totalMem}GB
+*│ \`● Uptime: ${hours}h ${minutes}m ${seconds}s
+*│ \`● Node.js:* ${process.version}
 *╰━━━━━━━━━━━━━━━━●◌*
 
 \`● Download Menu\`
@@ -335,11 +344,41 @@ async function kavixmdminibotmessagehandler(socket, number) {
             break;
           }
 
+          case 'news': {
+  try {
+    const sanitized = (number || '').replace(/[^0-9]/g, '');
+    const userCfg = await loadUserConfigFromMongo(sanitized) || {};
+    const botName = "ANUWH MD MINI BOT"; // 👈 Fixed bot name
+
+    // 📰 Fetch from Hiru News API
+    const res = await axios.get('https://chama-api-web-4.vercel.app/api/news/hiru');
+    if (!res.data?.status || !res.data.result)
+      return await socket.sendMessage(sender, { text: '❌ Failed to fetch Hiru News.' });
+
+    const n = res.data.result;
+
+    // 🧾 Build caption
+    const caption = `📰 *${n.title}*\n\n📅 *Date:* ${n.date}\n⏰ *Time:* ${n.time}\n\n${n.desc}\n\n🔗 [Read more](${n.url})\n\n_Provided by Anuga Senithu_`;
+
+    // 🖼️ Send image + caption
+    await socket.sendMessage(sender, { 
+      image: { url: n.image }, 
+      caption 
+    });
+
+  } catch (err) {
+    console.error('hirunews error:', err);
+    await socket.sendMessage(sender, { text: '❌ Error fetching Hiru News.' });
+  }
+  break;
+}
+
+
           case 'ping': {
             await socket.sendMessage(msg.key.remoteJid, { react: { text: "🏓", key: msg.key }}, { quoted: msg });
             const start = Date.now();
             const pingMsg = await socket.sendMessage(msg.key.remoteJid, { text: '🏓 Pinging...' }, { quoted: msg });
-            const ping = Date.now() - start;
+            const ping = Date.now - start;
             await socket.sendMessage(msg.key.remoteJid, { text: `🏓 Pong! ${ping}ms`, edit: pingMsg.key });
             break;
           }

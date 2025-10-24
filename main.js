@@ -100,7 +100,7 @@ async function kavixmdminibotmessagehandler(socket, number) {
       }
 
       let PREFIX = ".";
-      let botImg = "https://github.com/cyberxdevsofficial/Photos/blob/main/anuwhmd-logo.jpg";
+      let botImg = "anuga.jpg";
       let boterr = "An error has occurred, Please try again.";
       let sanitizedNumber = number.replace(/\D/g, '');
       let body = msgContent.trim();
@@ -290,6 +290,9 @@ async function kavixmdminibotmessagehandler(socket, number) {
 │
 │    \`■ Command :\` .freebot 
 │  *🍃 Connect Our Bot To Your Whatsapp*
+
+│    \`■ Command :\` .news
+│  *🍃 Get Hiru News*
 ╰━━━━━━━━━━━━━━━━━●◌
 
 > *- POWERED BY ANUGA SENITHU-*`;
